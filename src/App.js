@@ -19,6 +19,7 @@ class App extends Component {
     const ref = todoRef.doc()
     ref.set({
       task: this.state.todo,
+      description: this.state.description,
       createdAt:(new Date()).getTime(),
       done: false,
       id: ref.id
@@ -60,11 +61,17 @@ class App extends Component {
   renderTodoList () {
     const ListItem = this.state.todos.map((todo, index) => {
       return (
+        
         <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
+          
           {todo.task}
-          <button value={todo.id} className="btn btn-sm btn-danger" onClick={this.deleteTodo}>X</button>
+          <br/>
+          
+          {todo.description}
+         <button value={todo.id} className="btn btn-sm btn-danger" onClick={this.deleteTodo}>X</button>
         </li>
-      )
+        
+              )
     })
 
     return (
@@ -78,10 +85,11 @@ class App extends Component {
     console.log(this.state)
     return (
       <div className="App">
-        <h1>Firebase Test</h1>
+        <h1>FireStore Todo App</h1>
         <form onSubmit={this.addTodo}>
           <div className="input-group">
-            <input type="text" onChange={this.handleChange} name="todo" />
+            <input type="text" placeholder="enter Todo Here" onChange={this.handleChange} name="todo" />
+            <input type="text" placeholder="enter description here" onChange={this.handleChange} name="description" />
             <button className="btn btn-primary" type="submit" onClick={this.addTodo}>Add Todo</button>
           </div>
         </form>
